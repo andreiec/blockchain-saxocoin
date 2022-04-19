@@ -13,14 +13,11 @@ def updatehash(*args):
 
 
 class Block:
-    data = None
-    hash = None
-    nonce = 0
-    previous_hash = "0" * 64
-
-    def __init__(self, data, number=0):
+    def __init__(self, data=None, number=0, previous='0'*64, nonce=0):
         self.data = data
         self.number = number
+        self.previous_hash = previous
+        self.nonce = nonce
 
     def hash(self):
         return updatehash(self.previous_hash, self.number, self.data, self.nonce)
@@ -32,8 +29,8 @@ class Block:
 class Blockchain:
     difficulty = 4
 
-    def __init__(self, chain=None):
-        self.chain = [] if chain is None else chain
+    def __init__(self):
+        self.chain = []
 
     def add(self, block):
         self.chain.append(block)
@@ -69,14 +66,7 @@ class Blockchain:
 
 
 def main():
-    blockchain = Blockchain()
-    database = ['hello', 'are', 'you', 'okay']
-
-    for i, data in enumerate(database):
-        blockchain.mine(Block(data, i))
-
-    for b in blockchain.chain:
-        print(b)
+    pass
 
 
 if __name__ == "__main__":

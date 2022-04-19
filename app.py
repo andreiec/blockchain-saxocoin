@@ -11,7 +11,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = _mysql_password
 app.config['MYSQL_DB'] = 'saxocoin'
-app.config['MYSQL_CURSOR'] = 'DictCursor'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config['SECRET_KEY'] = 'secret123'
 
 mysql = MySQL(app)
@@ -23,12 +23,13 @@ def log_in_user(username):
 
     session['logged_in'] = True
     session['username'] = username
-    session['name'] = user[1]
-    session['email'] = user[3]
+    session['name'] = user.get('name')
+    session['email'] = user.get('email')
 
 
 @app.route("/")
 def index():
+    send_coin('andreiec', 'mihai', 200)
     return render_template("index.html")
 
 
@@ -53,7 +54,7 @@ def login():
 
             # user[4] is the password
             try:
-                accpass = user[4]
+                accpass = user.get('password')
             except:
                 return render_template('login.html', form=form)
 
