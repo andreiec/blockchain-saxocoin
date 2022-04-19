@@ -3,13 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
         <title>Saxocoin</title>
     </head>
 
     <body>
+        {% if not session.logged_in %}
         <a href="/login">Login</a>
         <a href="/register">Register</a>
+        {% endif %}
+
+        {% if session.logged_in %}
+        <a href="/logout">Logout</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/transaction">Transfer</a>
+        <a href="/buy">Buy</a>
+        {% endif %}
+
         <div>Hello World!</div>
     </body>
 </html>

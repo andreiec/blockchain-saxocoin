@@ -20,15 +20,15 @@
         <a href="/buy">Buy</a>
         {% endif %}
 
-        <div>Hello {{ session.get('name') }}, you have {{ balance }} SAX. </div>
+        <div>Transaction - You have {{ balance }} SAX.</div>
 
-        <table>
-            {% for block in blockchain %}
-                <tr>{{block.number}}</tr>
-                <tr>{{block.data}}</tr>
-                <tr>{{block.hash()}}</tr>
-            {% endfor %}
-        </table>
-        <p> Last update: {{ct}}</p>
+        <form method="POST" action="">
+            {{ form.csrf_token }}
+
+            {{ form.amount.label }}
+            {{ form.amount }}
+
+            <button type="submit">Buy</button>
+        </form>
     </body>
 </html>

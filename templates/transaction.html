@@ -8,26 +8,30 @@
     </head>
 
     <body>
+        {% if not session.logged_in %}
         <a href="/login">Login</a>
         <a href="/register">Register</a>
-        <div>Register</div>
+        {% endif %}
+
+        {% if session.logged_in %}
+        <a href="/logout">Logout</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/transaction">Transfer</a>
+        <a href="/buy">Buy</a>
+        {% endif %}
+
+        <div>Transaction - You have {{ balance }} SAX.</div>
 
         <form method="POST" action="">
             {{ form.csrf_token }}
 
-            {{ form.name.label }}
-            {{ form.name }}
-
             {{ form.username.label }}
             {{ form.username }}
 
-            {{ form.email.label }}
-            {{ form.email }}
+            {{ form.amount.label }}
+            {{ form.amount }}
 
-            {{ form.password.label }}
-            {{ form.password }}
-
-            <button type="submit">Register</button>
+            <button type="submit">Transfer</button>
         </form>
     </body>
 </html>

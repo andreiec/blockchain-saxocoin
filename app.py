@@ -4,6 +4,8 @@ from flask_mysqldb import MySQL
 from passwords import _mysql_password
 from sqlhelpers import *
 from forms import *
+import time
+
 
 app = Flask(__name__)
 
@@ -29,13 +31,50 @@ def log_in_user(username):
 
 @app.route("/")
 def index():
-    send_coin('andreiec', 'mihai', 200)
     return render_template("index.html")
 
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html", session=session)
+    blockchain = get_blockchain().chain
+    ct = time.strftime("%I:%M %p")
+    balance = get_balance(session.get('username'))
+
+    return render_template("dashboard.html", session=session, ct=ct, balance=balance, blockchain=blockchain, page='dashboard')
+
+
+@app.route('/transaction', methods=['GET', 'POST'])
+def transaction():
+    form = TransactionForm()
+    balance = get_balance(session.get('username'))
+
+    if request.method == "POST":
+        form = TransactionForm(request.form)
+
+        try:
+            send_coin(session.get('username'), form.username.data, form.amount.data)
+            return redirect(url_for('dashboard'))
+        except Exception as e:
+            return redirect(url_for('transaction'))
+
+    return render_template('transaction.html', session=session, balance=balance, form=form, page='transaction')
+
+
+@app.route("/buy", methods=['GET', 'POST'])
+def buy():
+    form = BuyForm()
+    balance = get_balance(session.get('username'))
+
+    if request.method == "POST":
+        form = BuyForm(request.form)
+
+        try:
+            send_coin('admin', session.get('username'), form.amount.data)
+            return redirect(url_for('dashboard'))
+        except Exception as e:
+            return redirect(url_for('buy'))
+
+    return render_template('buy.html', session=session, balance=balance, form=form, page='buy')
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -52,7 +91,6 @@ def login():
             users = Table('user', 'name', 'username', 'email', 'password')
             user = users.getone('username', username)
 
-            # user[4] is the password
             try:
                 accpass = user.get('password')
             except:

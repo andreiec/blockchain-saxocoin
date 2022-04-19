@@ -12,3 +12,12 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     username = StringField('Username', [validators.Length(min=4, max=64)])
     password = PasswordField('Password', [validators.input_required()])
+
+
+class TransactionForm(FlaskForm):
+    username = StringField('Username', [validators.Length(min=4, max=64)])
+    amount = StringField('Amount', [validators.Length(min=1, max=50)])
+
+
+class BuyForm(FlaskForm):
+    amount = StringField('Amount', [validators.Length(min=1, max=50)])

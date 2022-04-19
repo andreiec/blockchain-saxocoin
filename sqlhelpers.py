@@ -112,7 +112,7 @@ def send_coin(sender, recipient, amount):
     except ValueError:
         raise InvalidTransactionException("Invalid Transaction.")
 
-    if amount > get_balance(sender) and sender != 'andreiec':
+    if amount > get_balance(sender) and sender != 'admin':
         raise InsufficientFundsException("Insufficient Funds.")
 
     if sender == recipient or amount <= 0.00:
