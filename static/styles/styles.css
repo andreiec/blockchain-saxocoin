@@ -167,3 +167,18 @@ body {
     margin-bottom: 30px;
     font-weight: 600;
 }
+
+.dashboard-wrapper {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.dashboard-header {
+    padding-top: 100px;
+    font-size: 30px;
+    color: white;
+}
+
+.dashboard-title {
+    color: white;
+}

@@ -27,15 +27,27 @@
             {% endif %}
         </div>
 
-        <div>Hello {{ session.get('name') }}, you have {{ balance }} SAX. </div>
+        <div class="dashboard-wrapper first-page">
+            <div class="dashboard-header">Hello {{ session.get('name') }}, you have {{ balance }} SAX. </div>
 
-        <table>
-            {% for block in blockchain %}
-                <tr>{{block.number}}</tr>
-                <tr>{{block.data}}</tr>
-                <tr>{{block.hash()}}</tr>
-            {% endfor %}
-        </table>
-        <p> Last update: {{ct}}</p>
+            <div class="first-page-table-wrapper">
+                <p class="first-page-table-title dashboard-title">Blocks</p>
+                <div class="first-page-table">
+                    <div class="first-page-row first-page-header">
+                        <div class="first-page-cell">Number</div>
+                        <div class="first-page-cell">Data</div>
+                        <div class="first-page-cell">Hash</div>
+                    </div>
+                    {% for block in blockchain %}
+                    <div class="first-page-row">
+                        <div class="first-page-cell" data-title="Number">{{block.number}}</div>
+                        <div class="first-page-cell" data-title="Data">{{block.data}}</div>
+                        <div class="first-page-cell" data-title="Hash">{{block.hash()}}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        <p style="color:white;"> Last update: {{ct}}</p>
+        </div>
     </body>
 </html>
