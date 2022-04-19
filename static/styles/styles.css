@@ -85,7 +85,6 @@ body {
     border:none;
     margin:0;
     padding:0;
-    cursor: pointer;
     font-size: 26px;
     color:#ffffff;
     font-weight: 500;
@@ -125,8 +124,11 @@ body {
   display: table-row;
   background: #f6f6f6;
 
-  &:nth-of-type(odd):
-    background: #e9e9e9;
+
+}
+
+.first-page-row:nth-of-type(even){
+    background: white;
 }
 
 .first-page-header {
@@ -143,4 +145,19 @@ body {
 @keyframes rotateAnimation {
 	from {transform: rotateY(0deg);}
 	to {transform: rotateY(360deg);}
+}
+
+/* LOGIN */
+
+.login-form-wrapper {
+    padding-top: 130px;
+    margin-left: 860px;
+}
+
+.login-box {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    gap: 20px;
 }

@@ -32,7 +32,7 @@ def log_in_user(username):
 @app.route("/")
 def index():
     blockchain = get_blockchain().chain
-    return render_template("index.html", blockchain=blockchain)
+    return render_template("index.html", blockchain=blockchain, session=session)
 
 
 @app.route("/dashboard")
@@ -95,14 +95,14 @@ def login():
             try:
                 accpass = user.get('password')
             except:
-                return render_template('login.html', form=form)
+                return render_template('login.html', form=form, session=session)
 
             if accpass == password:
                 log_in_user(username)
 
                 return redirect(url_for('dashboard'))
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, session=session)
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -125,7 +125,7 @@ def register():
             return redirect(url_for('dashboard'))
 
     form = RegisterForm()
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, session=session)
 
 
 @app.route("/logout")
