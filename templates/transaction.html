@@ -13,6 +13,7 @@
 
     <body>
         <div class="navbar">
+            <a href="/">Home</a>
             {% if not session.logged_in %}
                 <a href="/login">Login</a>
                 <a href="/register">Register</a>
@@ -26,18 +27,29 @@
             {% endif %}
         </div>
 
-        <div>Transaction - You have {{ balance }} SAX.</div>
 
-        <form method="POST" action="">
-            {{ form.csrf_token }}
 
-            {{ form.username.label }}
-            {{ form.username }}
+        <div class="first-page">
+            <div class="login-form-wrapper">
+                 <form method="POST" action="">
+                     <div class="login-box">
+                         <div class="transfer-header">Balance: {{ balance }} SAX.</div>
+                         {{ form.csrf_token }}
 
-            {{ form.amount.label }}
-            {{ form.amount }}
+                         <div>
+                            {{ form.username.label }}
+                             {{ form.username }}
+                         </div>
 
-            <button type="submit">Transfer</button>
-        </form>
+                        <div>
+                            {{ form.amount.label }}
+                            {{ form.amount }}
+                        </div>
+
+                     </div>
+                    <button type="submit" style="margin-top: 30px;">Transfer</button>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
