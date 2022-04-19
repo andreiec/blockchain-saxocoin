@@ -31,7 +31,8 @@ def log_in_user(username):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    blockchain = get_blockchain().chain
+    return render_template("index.html", blockchain=blockchain)
 
 
 @app.route("/dashboard")

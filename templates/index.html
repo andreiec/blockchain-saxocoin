@@ -4,22 +4,61 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
         <title>Saxocoin</title>
     </head>
 
-    <body>
-        {% if not session.logged_in %}
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-        {% endif %}
+    <body class="unscrollable">
+        <div class="navbar">
+            {% if not session.logged_in %}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            {% endif %}
 
-        {% if session.logged_in %}
-        <a href="/logout">Logout</a>
-        <a href="/dashboard">Dashboard</a>
-        <a href="/transaction">Transfer</a>
-        <a href="/buy">Buy</a>
-        {% endif %}
+            {% if session.logged_in %}
+                <a href="/logout">Logout</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/transaction">Transfer</a>
+                <a href="/buy">Buy</a>
+            {% endif %}
+        </div>
 
-        <div>Hello World!</div>
+        <div class="first-page">
+            <img class="saxocoin-big-image" src="static/images/saxocoin-big.png" alt="coin" />
+
+            <div class="landing-title">
+                <h1>Saxocoin - The only coin you will ever want to hear the sound of.</h1>
+            </div>
+
+            <div class="scroll-text" >
+                <a href="#second-page" class="scroll-text-link">
+                    <img src="static/images/arrow.png" alt="Scroll down image" style="width: 25px; height: 25px;">
+                    <button class="scroll-text-button">Find out more!</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="second-page">
+            <div class="first-page-table-wrapper">
+                <p class="first-page-table-title">Blocks</p>
+                <div class="first-page-table">
+                    <div class="first-page-row first-page-header">
+                        <div class="first-page-cell">Number</div>
+                        <div class="first-page-cell">Data</div>
+                        <div class="first-page-cell">Hash</div>
+                    </div>
+                    {% for block in blockchain %}
+                    <div class="first-page-row">
+                        <div class="first-page-cell" data-title="Number">{{block.number}}</div>
+                        <div class="first-page-cell" data-title="Data">{{block.data}}</div>
+                        <div class="first-page-cell" data-title="Hash">{{block.hash()}}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </body>
 </html>

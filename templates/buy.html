@@ -4,21 +4,27 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
         <title>Saxocoin</title>
     </head>
 
     <body>
-        {% if not session.logged_in %}
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-        {% endif %}
+        <div class="navbar">
+            {% if not session.logged_in %}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            {% endif %}
 
-        {% if session.logged_in %}
-        <a href="/logout">Logout</a>
-        <a href="/dashboard">Dashboard</a>
-        <a href="/transaction">Transfer</a>
-        <a href="/buy">Buy</a>
-        {% endif %}
+            {% if session.logged_in %}
+                <a href="/logout">Logout</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/transaction">Transfer</a>
+                <a href="/buy">Buy</a>
+            {% endif %}
+        </div>
 
         <div>Transaction - You have {{ balance }} SAX.</div>
 
