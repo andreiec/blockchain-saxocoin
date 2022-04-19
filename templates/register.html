@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Saxocoin</title>
+    </head>
+
+    <body>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <div>Register</div>
+
+        <form method="POST" action="">
+            {{ form.csrf_token }}
+
+            {{ form.name.label }}
+            {{ form.name }}
+
+            {{ form.username.label }}
+            {{ form.username }}
+
+            {{ form.email.label }}
+            {{ form.email }}
+
+            {{ form.password.label }}
+            {{ form.password }}
+
+            <button type="submit">Register</button>
+        </form>
+    </body>
+</html>

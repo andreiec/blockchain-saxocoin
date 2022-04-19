@@ -20,16 +20,6 @@ class Table:
         self.columns = f"{','.join(args)}"
         self.columnList = args
 
-        if isnewtable(table_name):
-            create_data = ""
-
-            for column in self.columnList:
-                create_data += f"{column} varchar(128)"
-
-            cur = mysql.connection.cursor()
-            cur.execute(f"CREATE TABLE {self.table}({self.columns})")
-            cur.close()
-
     # Base class for table
     def getall(self):
         cur = mysql.connection.cursor()
@@ -66,10 +56,10 @@ class Table:
     def insert(self, *args):
         data = ""
         for arg in args:
-            data += f"\"{arg}\","
+            data += f'\"{arg}\",'
 
         cur = mysql.connection.cursor()
-        cur.execute(f"INSERT INTO {self.table}{self.columns} VALUES({data[:len(data)-1]})")
+        cur.execute(f"INSERT INTO `saxocoin`.`{self.table}` ({self.columns}) VALUES({data[:len(data)-1]})")
         mysql.connection.commit()
         cur.close()
 
